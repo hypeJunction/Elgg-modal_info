@@ -1,0 +1,20 @@
+{
+	"name": "hypejunction/modal_info",
+	"type": "elgg-plugin",
+	"description": "Modal Info Screens",
+	"homepage": "http://hypejunction.com",
+	"keywords": [
+		"elgg", "plugin", "modal", "welcome", "help"
+	],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Ismayil Khayredinov",
+			"email": "info@hypejunction.com"
+		}
+	],
+	"require-dev": {
+		"composer/installers": "1.*"
+	}
+}
+
