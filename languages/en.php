@@ -16,7 +16,7 @@ return array(
 	'modal_info:height' => 'Modal height',
 	'modal_info:show_once' => 'Show only once',
 	'modal_info:can_dismiss' => 'Allow users to permanently dismiss the modal',
-	'modal_info:dismiss' => 'Dismiss',
+	'modal_info:dismiss' => 'Do not show this info again',
 
 	'modal_info:edit:success' => 'Modal info has been saved',
 	'modal_info:edit:error' => 'Modal info could not be saved',

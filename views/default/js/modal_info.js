@@ -15,13 +15,11 @@ define(function (require) {
 		height: $modal.data('height') || 600,
 	});
 
-	$(document).on('click', '.modal-info-dismiss', function (e) {
-		e.preventDefault();
+	$(document).on('change', '.modal-info-dismiss', function (e) {
 		var $elem = $(this);
-
-		elgg.action($elem.attr('href'), {
-			beforeSend: function () {
-				$.colorbox.close();
+		elgg.action($elem.data('action'), {
+			data: {
+				dismiss: $elem.is(':checked') ? 1 : 0
 			}
 		});
 	});
