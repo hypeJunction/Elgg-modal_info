@@ -8,7 +8,7 @@ elgg_register_menu_item('title', array(
 	'name' => 'add',
 	'href' => 'modal_info/add',
 	'text' => elgg_echo('modal_info:add'),
-	'class' => 'elgg-button elgg-button-action',
+	'link_class' => 'elgg-button elgg-button-action',
 ));
 
 $title = elgg_echo('modal_info:all');
