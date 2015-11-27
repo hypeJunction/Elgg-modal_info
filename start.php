@@ -124,7 +124,7 @@ function modal_info_setup_menu($hook, $type, $return, $params) {
 		$return[] = ElggMenuItem::factory(array(
 					'name' => 'delete',
 					'text' => elgg_view_icon('delete'),
-					'href' => "actions/entities/delete?guid=$entity->guid",
+					'href' => "delete/$entity->guid",
 					'confirm' => true,
 					'priority' => 900,
 		));
