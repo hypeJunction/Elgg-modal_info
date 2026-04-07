@@ -1,6 +1,8 @@
 <?php
 
 return [
+	'bootstrap' => \hypeJunction\ModalInfo\Bootstrap::class,
+
 	'actions' => [
 		'modal_info/edit' => [
 			'access' => 'admin',
