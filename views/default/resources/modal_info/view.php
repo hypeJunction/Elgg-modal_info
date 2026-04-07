@@ -18,7 +18,7 @@ $content = elgg_view_entity($entity, array(
 if (elgg_is_xhr()) {
 	echo $content;
 } else {
-	$layout = elgg_view_layout('content', array(
+	$layout = elgg_view_layout('default', array(
 		'entity' => $entity,
 		'title' => $title,
 		'content' => $content,

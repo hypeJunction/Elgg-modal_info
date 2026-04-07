@@ -15,7 +15,7 @@ $content = elgg_view_form('modal_info/edit', array(), array(
 	'entity' => $entity,
 ));
 
-$layout = elgg_view_layout('content', array(
+$layout = elgg_view_layout('default', array(
 	'title' => $title,
 	'content' => $content,
 	'filter' => '',

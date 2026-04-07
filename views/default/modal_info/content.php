@@ -22,8 +22,6 @@ if ($entity->can_dismiss && elgg_is_logged_in()) {
 			), $dismiss_button);
 }
 
-elgg_load_css('lightbox');
-elgg_load_js('lightbox');
 elgg_require_js('modal_info');
 echo elgg_format_element('div', array(
 	'id' => 'modal-info',

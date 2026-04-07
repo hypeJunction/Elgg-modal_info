@@ -13,12 +13,12 @@ elgg_register_menu_item('title', array(
 
 $title = elgg_echo('modal_info:all');
 $content = elgg_list_entities(array(
-	'types' => 'object',
-	'subtypes' => 'modal_info',
+	'type' => 'object',
+	'subtype' => 'modal_info',
 	'no_results' => elgg_echo('modal_info:no_results'),
 ));
 
-$layout = elgg_view_layout('content', array(
+$layout = elgg_view_layout('default', array(
 	'title' => $title,
 	'content' => $content,
 	'filter' => '',
