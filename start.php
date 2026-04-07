@@ -1,12 +1,8 @@
 <?php
 
-require_once __DIR__ . '/autoloader.php';
 elgg_register_event_handler('init', 'system', 'modal_info_init');
-function modal_info_init()
-{
-	elgg_register_action('modal_info/edit', __DIR__ . '/actions/modal_info/edit.php', 'admin');
-	elgg_register_action('modal_info/dismiss', __DIR__ . '/actions/modal_info/dismiss.php');
-	elgg_register_route('modal_info', ['path' => '/modal_info/{segments}', 'resource' => 'modal_info', 'requirements' => ['segments' => '.+'], 'defaults' => ['segments' => '']]);
+
+function modal_info_init() {
 	elgg_register_plugin_hook_handler('entity:url', 'object', 'modal_info_url');
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'modal_info_setup_menu');
 	elgg_extend_view('page/elements/footer', 'modal_info/preload');
@@ -19,16 +15,16 @@ function modal_info_init()
 		'section' => 'configure',
 	]));
 }
-function modal_info_url($hook, $type, $return, $params)
-{
+
+function modal_info_url($hook, $type, $return, $params) {
 	$entity = elgg_extract('entity', $params);
 	if (!$entity instanceof ElggObject || $entity->getSubtype() != 'modal_info') {
 		return;
 	}
 	return "modal_info/view/{$entity->guid}";
 }
-function modal_info_setup_menu($hook, $type, $return, $params)
-{
+
+function modal_info_setup_menu($hook, $type, $return, $params) {
 	$entity = elgg_extract('entity', $params);
 	if (!$entity instanceof ElggObject || $entity->getSubtype() != 'modal_info') {
 		return;
