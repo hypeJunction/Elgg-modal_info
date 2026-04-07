@@ -1,7 +1,5 @@
 <?php
 
-admin_gatekeeper();
-
 elgg_push_breadcrumb(elgg_echo('modal_info:all'), 'modal_info/all');
 
 elgg_register_menu_item('title', array(

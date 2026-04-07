@@ -32,9 +32,7 @@ $entity->show_once = get_input('show_once') ? : false;
 $entity->can_dismiss = get_input('can_dismiss') ? : false;
 
 if ($entity->save()) {
-	system_message(elgg_echo('modal_info:edit:success'));
-	forward('/modal_info/all');
-} else {
-	register_error(elgg_echo('modal_info:edit:error'));
-	forward(REFERRER);
+	return elgg_ok_response('', elgg_echo('modal_info:edit:success'), '/modal_info/all');
 }
+
+return elgg_error_response(elgg_echo('modal_info:edit:error'));

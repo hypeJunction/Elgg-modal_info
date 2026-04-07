@@ -8,4 +8,4 @@ if ($entity && $user) {
 	$user->addRelationship($entity->guid, 'viewed');
 }
 
-forward(REFERRER);
+return elgg_ok_response();

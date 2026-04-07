@@ -1,7 +1,5 @@
 <?php
 
-admin_gatekeeper();
-
 $guid = elgg_extract('guid', $vars);
 elgg_entity_gatekeeper($guid, 'object', 'modal_info');
 
