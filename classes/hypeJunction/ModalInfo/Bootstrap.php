@@ -76,8 +76,8 @@ class Bootstrap extends PluginBootstrap {
 	/**
 	 * Set entity URL for modal_info objects
 	 */
-	public function setEntityUrl($hook, $type, $return, $params) {
-		$entity = elgg_extract('entity', $params);
+	public function setEntityUrl(\Elgg\Hook $hook) {
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \ElggObject || $entity->getSubtype() != 'modal_info') {
 			return;
 		}
@@ -87,11 +87,12 @@ class Bootstrap extends PluginBootstrap {
 	/**
 	 * Setup entity menu for modal_info objects
 	 */
-	public function setupEntityMenu($hook, $type, $return, $params) {
-		$entity = elgg_extract('entity', $params);
+	public function setupEntityMenu(\Elgg\Hook $hook) {
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \ElggObject || $entity->getSubtype() != 'modal_info') {
 			return;
 		}
+		$return = $hook->getValue();
 		if ($entity->canEdit()) {
 			$return[] = \ElggMenuItem::factory([
 				'name' => 'edit',

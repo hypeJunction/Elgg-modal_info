@@ -1,6 +1,6 @@
 define(function (require) {
 
-	var elgg = require('elgg');
+	var Ajax = require('elgg/Ajax');
 	var $ = require('jquery');
 	var lightbox = require('elgg/lightbox');
 
@@ -18,12 +18,10 @@ define(function (require) {
 	$(document).on('click', '.modal-info-dismiss', function (e) {
 		e.preventDefault();
 		var $elem = $(this);
+		var ajax = new Ajax();
 
-		elgg.action($elem.attr('href'), {
-			beforeSend: function () {
-				lightbox.close();
-			}
-		});
+		lightbox.close();
+		ajax.action($elem.attr('href'));
 	});
 
 });

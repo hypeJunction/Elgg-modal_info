@@ -4,8 +4,12 @@ $user_guid = (int) elgg_get_logged_in_user_guid();
 $page_url = parse_url(current_page_url(), PHP_URL_PATH);
 
 $not_viewed_clause = function(\Elgg\Database\QueryBuilder $qb, $alias) use ($user_guid) {
-	$dbprefix = elgg_get_config('dbprefix');
-	return "NOT EXISTS (SELECT 1 FROM {$dbprefix}entity_relationships WHERE guid_one = {$user_guid} AND relationship = 'viewed' AND guid_two = {$alias}.guid)";
+	$rel = $qb->subquery('entity_relationships');
+	$rel->select('1')
+		->where($qb->compare('guid_one', '=', $user_guid, ELGG_VALUE_INTEGER))
+		->andWhere($qb->compare('relationship', '=', 'viewed', ELGG_VALUE_STRING))
+		->andWhere("guid_two = {$alias}.guid");
+	return "NOT EXISTS ({$rel->getSQL()})";
 };
 
 $options = [
