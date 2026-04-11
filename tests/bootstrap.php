@@ -1,32 +1,27 @@
 <?php
-
 /**
- * PHPUnit test bootstrap for modal_info plugin.
- *
- * Locates the Elgg engine's PHPUnit bootstrap and loads it,
- * then ensures the plugin autoloader is available.
+ * PHPUnit bootstrap for Elgg plugin tests.
+ * Plugin must be installed at {elgg_root}/mod/{plugin_id}/
  */
 
-// Elgg engine root – adjust path if your install layout differs
-$engine = dirname(__DIR__, 4); // e.g. /path/to/elgg/mod/modal_info -> /path/to/elgg
+// tests/ -> mod/plugin/ -> mod/ -> elgg_root/
+$elggRoot = dirname(dirname(dirname(__DIR__)));
 
-$elgg_bootstrap = "{$engine}/engine/tests/phpunit/bootstrap.php";
-if (!file_exists($elgg_bootstrap)) {
-	// Fallback: try the vendor-installed Elgg test bootstrap
-	$elgg_bootstrap = "{$engine}/vendor/elgg/elgg/engine/tests/phpunit/bootstrap.php";
+require_once $elggRoot . '/vendor/autoload.php';
+
+// Load Elgg test classes (UnitTestCase, IntegrationTestCase, etc.)
+$testClassesDir = $elggRoot . '/vendor/elgg/elgg/engine/tests/classes';
+spl_autoload_register(function ($class) use ($testClassesDir) {
+    $file = $testClassesDir . '/' . str_replace('\\', '/', $class) . '.php';
+    if (file_exists($file)) require_once $file;
+});
+
+// Load plugin autoloader if present
+$pluginRoot = dirname(__DIR__);
+if (file_exists($pluginRoot . '/vendor/autoload.php')) {
+    require_once $pluginRoot . '/vendor/autoload.php';
+} elseif (file_exists($pluginRoot . '/autoloader.php')) {
+    require_once $pluginRoot . '/autoloader.php';
 }
 
-if (!file_exists($elgg_bootstrap)) {
-	throw new \RuntimeException(
-		'Could not locate the Elgg PHPUnit bootstrap. '
-		. 'Make sure this plugin is installed inside an Elgg installation.'
-	);
-}
-
-require_once $elgg_bootstrap;
-
-// Load plugin autoloader
-$plugin_root = dirname(__DIR__);
-if (file_exists("{$plugin_root}/vendor/autoload.php")) {
-	require_once "{$plugin_root}/vendor/autoload.php";
-}
+\Elgg\Application::loadCore();
