@@ -16,9 +16,11 @@ const TABLE_PREFIX = process.env.ELGG_DB_PREFIX || 'elgg_';
  */
 export async function loginAs(page: Page, username: string, password: string): Promise<void> {
   await page.goto('/login');
-  await page.fill('input[name="username"]', username);
-  await page.fill('input[name="password"]', password);
-  await page.click('button[type="submit"], input[type="submit"]');
+  // Elgg 4.x renders two login forms (hidden header dropdown + visible sidebar).
+  // Target the visible sidebar form to avoid filling the hidden one.
+  await page.fill('.elgg-module-aside input[name="username"]', username);
+  await page.fill('.elgg-module-aside input[name="password"]', password);
+  await page.click('.elgg-module-aside button[type="submit"], .elgg-module-aside input[type="submit"]');
   await page.waitForURL((url) => !url.pathname.includes('/login'));
 }
 
