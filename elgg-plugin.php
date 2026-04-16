@@ -1,6 +1,15 @@
 <?php
 
 return [
+	'plugin' => [
+		'id' => 'modal_info',
+		'name' => 'Modal Info Screens',
+		'description' => 'Custom modal info screen popups',
+		'version' => '4.0.0',
+		'author' => 'Ismayil Khayredinov',
+		'categories' => ['help'],
+	],
+
 	'bootstrap' => \hypeJunction\ModalInfo\Bootstrap::class,
 
 	'actions' => [
