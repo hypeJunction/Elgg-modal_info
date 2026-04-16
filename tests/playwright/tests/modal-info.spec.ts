@@ -26,6 +26,14 @@ async function cleanupEntity(guid: number) {
 
 test.describe('Modal Info Plugin', () => {
 
+  // Clean up ALL modal_info entities before each test to prevent cross-test interference.
+  // Using SQL directly because Elgg's delete() requires an active session.
+  test.beforeEach(async () => {
+    await queryDb(`DELETE FROM ${TABLE_PREFIX}metadata WHERE entity_guid IN (SELECT guid FROM ${TABLE_PREFIX}entities WHERE subtype = 'modal_info')`);
+    await queryDb(`DELETE FROM ${TABLE_PREFIX}entity_relationships WHERE guid_one IN (SELECT guid FROM ${TABLE_PREFIX}entities WHERE subtype = 'modal_info') OR guid_two IN (SELECT guid FROM ${TABLE_PREFIX}entities WHERE subtype = 'modal_info')`);
+    await queryDb(`DELETE FROM ${TABLE_PREFIX}entities WHERE subtype = 'modal_info'`);
+  });
+
   test('admin can create modal info', async ({ page }) => {
     await loginAs(page, ADMIN_USER, ADMIN_PASS);
     await page.goto('/modal_info/add');
@@ -168,7 +176,8 @@ test.describe('Modal Info Plugin', () => {
     const entities = await findEntities('object', 'modal_info');
     const entity = entities[0];
 
-    // Now navigate to activity page as a regular user
+    // Switch to test user — clear admin session cookies first.
+    await page.context().clearCookies();
     await loginAs(page, TEST_USER, TEST_PASS);
     await page.goto('/activity');
 
@@ -214,14 +223,17 @@ test.describe('Modal Info Plugin', () => {
     const entities = await findEntities('object', 'modal_info');
     const entity = entities[0];
 
-    // Login as test user
+    // Switch to test user — clear admin session cookies first.
+    await page.context().clearCookies();
     await loginAs(page, TEST_USER, TEST_PASS);
 
     // Navigate to any page - modal should appear
     await page.goto('/activity');
 
-    // Wait for the dismiss button
-    const dismissBtn = page.locator('.modal-info-dismiss');
+    // The JS lightbox copies #modal-info content into the lightbox overlay.
+    // Use getByRole to target the VISIBLE dismiss link in the lightbox (not the hidden
+    // copy inside #modal-info which has display:none).
+    const dismissBtn = page.getByRole('link', { name: /dismiss/i });
     if (await dismissBtn.count() > 0) {
       // Click dismiss - this triggers an AJAX action
       await dismissBtn.first().click();

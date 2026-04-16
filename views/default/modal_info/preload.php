@@ -1,5 +1,9 @@
 <?php
 
+if (!elgg_is_logged_in() || elgg_in_context('admin') || elgg_in_context('modal_info')) {
+	return;
+}
+
 $user_guid = (int) elgg_get_logged_in_user_guid();
 $page_url = parse_url(current_page_url(), PHP_URL_PATH);
 

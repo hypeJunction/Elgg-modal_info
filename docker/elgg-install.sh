@@ -141,6 +141,27 @@ SETTINGS_VALUES
         }
     " 2>&1 || echo "Plugin activation completed (check for errors above)."
 
+    # Create a test user for Playwright tests
+    php -r "
+        require_once 'vendor/autoload.php';
+        \$app = Elgg\Application::getInstance();
+        \$app->bootCore();
+        if (!get_user_by_username('testuser')) {
+            \$user = new ElggUser();
+            \$user->username = 'testuser';
+            \$user->email = 'testuser@example.com';
+            \$user->name = 'Test User';
+            \$user->access_id = ACCESS_PUBLIC;
+            \$user->setPassword('testuser12345');
+            if (\$user->save()) {
+                \$user->validated = 1;
+                \$user->validated_method = 'admin';
+                \$user->save();
+                echo 'testuser created.' . PHP_EOL;
+            }
+        }
+    " 2>&1
+
     touch /var/www/html/.elgg-installed
     echo "Elgg 4.x setup complete."
 fi

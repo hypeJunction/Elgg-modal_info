@@ -37,6 +37,7 @@ services:
       ELGG_DATA_ROOT: "/var/www/data/"
       ELGG_ADMIN_EMAIL: "admin@example.com"
       ELGG_ADMIN_PASSWORD: "admin12345"
+      ELGG_DB_PREFIX: "elgg_"
     ports:
       - "${ELGG_PORT:-8480}:80"
     depends_on:
@@ -66,7 +67,7 @@ services:
   # /plugin so a destructive in-container command cannot touch anything
   # outside this repo.
   node:
-    image: mcr.microsoft.com/playwright:v1.49.0-noble
+    image: mcr.microsoft.com/playwright:v1.59.1-noble
     volumes:
       - ..:/plugin
     working_dir: /plugin
