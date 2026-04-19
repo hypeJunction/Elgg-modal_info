@@ -4,7 +4,11 @@
 	"description": "Modal Info Screens",
 	"homepage": "http://hypejunction.com",
 	"keywords": [
-		"elgg", "plugin", "modal", "welcome", "help"
+		"elgg",
+		"plugin",
+		"modal",
+		"welcome",
+		"help"
 	],
 	"license": "GPL-2.0",
 	"authors": [
@@ -24,6 +28,9 @@
 		}
 	},
 	"extra": {
-		"installer-name": "modal_info"
+		"installer-name": "modal_info",
+		"elgg-plugin": {
+			"id": "modal_info"
+		}
 	}
 }
