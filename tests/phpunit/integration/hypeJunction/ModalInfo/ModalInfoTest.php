@@ -20,7 +20,7 @@ class ModalInfoTest extends IntegrationTestCase {
 
 	public function up() {
 		$this->admin = $this->getAdmin();
-		elgg_get_session()->setLoggedInUser($this->admin);
+		_elgg_services()->session_manager->setLoggedInUser($this->admin);
 
 		$this->user = $this->createUser();
 	}
@@ -30,7 +30,7 @@ class ModalInfoTest extends IntegrationTestCase {
 			$this->user->delete();
 		}
 
-		elgg_get_session()->removeLoggedInUser();
+		_elgg_services()->session_manager->removeLoggedInUser();
 	}
 
 	/**
@@ -222,7 +222,7 @@ class ModalInfoTest extends IntegrationTestCase {
 	 */
 	public function testAdminGatekeeper() {
 		// Login as non-admin user
-		elgg_get_session()->setLoggedInUser($this->user);
+		_elgg_services()->session_manager->setLoggedInUser($this->user);
 
 		// The routes are defined with AdminGatekeeper middleware.
 		// Verify the user is not an admin.
@@ -242,7 +242,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		}
 
 		// Restore admin session
-		elgg_get_session()->setLoggedInUser($this->admin);
+		_elgg_services()->session_manager->setLoggedInUser($this->admin);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-# modal_info — Plugin Architecture (Elgg 4.x)
+# modal_info — Plugin Architecture (Elgg 5.x)
 
 ## Summary
 
@@ -52,14 +52,16 @@ modal_info/
 │       ├── edit.php      # Admin edit page
 │       └── view.php      # Admin view page
 ├── elgg-plugin.php       # Plugin declaration, routes, actions
-├── composer.json         # Dependencies: elgg/elgg ^4.0
+├── composer.json         # Dependencies: elgg/elgg ^5.0
 └── autoloader.php        # PSR-4 autoloader for classes/
 ```
 
-## Registered Hooks
+## Registered Events
 
-| Hook | Type | Handler | Description |
-|------|------|---------|-------------|
+Registered programmatically in `Bootstrap::init()` via `elgg_register_event_handler()` (Elgg 5.x unified event system).
+
+| Event | Object type | Handler | Description |
+|-------|-------------|---------|-------------|
 | `entity:url` | `object` | `Bootstrap::setEntityUrl` | Returns `/modal_info/view/{guid}` URL |
 | `register` | `menu:entity` | `Bootstrap::setupEntityMenu` | Adds edit/delete items for modal_info objects |
 
@@ -83,18 +85,17 @@ All routes require `\Elgg\Router\Middleware\AdminGatekeeper`.
 
 ## Dependencies
 
-None (no plugin deps; requires only Elgg core ≥ 4.0).
+None (no plugin deps; requires only Elgg core ≥ 5.0, PHP ≥ 8.0).
 
 ## JavaScript
 
 `views/default/js/modal_info.js` — AMD module. On page load, reads the `#modal-info` div injected by `preload.php` and opens it via `elgg/lightbox`. The dismiss button triggers `elgg/Ajax` to call `action/modal_info/dismiss`.
 
-## Migration Notes (3.x → 4.x)
+## Migration Notes (4.x → 5.x)
 
-- `manifest.xml` removed; metadata now in `elgg-plugin.php` `'plugin'` key and `composer.json`
-- `start.php` removed
-- `Bootstrap` hook callbacks updated to single `\Elgg\Hook` parameter
-- `preload.php` raw SQL replaced with `QueryBuilder` subquery
-- JS: `elgg.action()` replaced with `elgg/Ajax` module
-- `preload.php` now guards against non-logged-in users and admin context to prevent lightbox from appearing on admin pages
-- `composer/installers` moved from `require-dev` to `require` with version `^2.0`
+- `composer.json` bumped to PHP ≥ 8.0 and `elgg/elgg ^5.0`
+- `elgg_register_plugin_hook_handler()` replaced with `elgg_register_event_handler()` in `Bootstrap::init()`
+- `\Elgg\Hook` callback parameter updated to `\Elgg\Event` in `setEntityUrl()` and `setupEntityMenu()`
+- `$hook->getValue()` / `$hook->getEntityParam()` updated to `$event->getValue()` / `$event->getEntityParam()`
+- Integration tests updated: `elgg_get_session()->setLoggedInUser()` → `_elgg_services()->session_manager->setLoggedInUser()` (Elgg 5.x session API)
+- Docker test stack upgraded: `php:8.1-apache`, `mysql:8.0`, `elgg/elgg ~5.1.0`

@@ -25,8 +25,8 @@ class Bootstrap extends PluginBootstrap {
 	 * {@inheritdoc}
 	 */
 	public function init() {
-		elgg_register_plugin_hook_handler('entity:url', 'object', [$this, 'setEntityUrl']);
-		elgg_register_plugin_hook_handler('register', 'menu:entity', [$this, 'setupEntityMenu']);
+		elgg_register_event_handler('entity:url', 'object', [$this, 'setEntityUrl']);
+		elgg_register_event_handler('register', 'menu:entity', [$this, 'setupEntityMenu']);
 		elgg_extend_view('page/elements/footer', 'modal_info/preload');
 		elgg_register_menu_item('page', \ElggMenuItem::factory([
 			'name' => 'modal_info',
@@ -76,8 +76,8 @@ class Bootstrap extends PluginBootstrap {
 	/**
 	 * Set entity URL for modal_info objects
 	 */
-	public function setEntityUrl(\Elgg\Hook $hook) {
-		$entity = $hook->getEntityParam();
+	public function setEntityUrl(\Elgg\Event $event) {
+		$entity = $event->getEntityParam();
 		if (!$entity instanceof \ElggObject || $entity->getSubtype() != 'modal_info') {
 			return;
 		}
@@ -87,12 +87,12 @@ class Bootstrap extends PluginBootstrap {
 	/**
 	 * Setup entity menu for modal_info objects
 	 */
-	public function setupEntityMenu(\Elgg\Hook $hook) {
-		$entity = $hook->getEntityParam();
+	public function setupEntityMenu(\Elgg\Event $event) {
+		$entity = $event->getEntityParam();
 		if (!$entity instanceof \ElggObject || $entity->getSubtype() != 'modal_info') {
 			return;
 		}
-		$return = $hook->getValue();
+		$return = $event->getValue();
 		if ($entity->canEdit()) {
 			$return[] = \ElggMenuItem::factory([
 				'name' => 'edit',

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Per-plugin Elgg 4.x install + activation script.
+# Per-plugin Elgg 5.x install + activation script.
 # PLUGIN_ID must be set in the container environment (passed by docker-compose
 # from <plugin>/docker/.env). Only that one plugin is activated — no fleet
 # activation, no plugin-order.txt, no cross-plugin side effects.
@@ -139,6 +139,8 @@ SETTINGS_VALUES
                 exit(1);
             }
         }
+        elgg_reset_system_cache();
+        echo 'System cache reset.' . PHP_EOL;
     " 2>&1 || echo "Plugin activation completed (check for errors above)."
 
     # Create a test user for Playwright tests

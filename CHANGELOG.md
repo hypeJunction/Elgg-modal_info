@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.0.0 (2026-04-20)
+
+### Elgg 5.x migration
+
+* Target Elgg `^5.0` (PHP >= 8.0).
+* `elgg_register_plugin_hook_handler()` replaced with `elgg_register_event_handler()` in `Bootstrap::init()`.
+* Handler signatures updated from `\Elgg\Hook` to `\Elgg\Event`; `$hook->getValue()` and `$hook->getEntityParam()` updated to `$event->getValue()` and `$event->getEntityParam()`.
+* Integration tests updated for Elgg 5.x session API: `elgg_get_session()->setLoggedInUser()` → `_elgg_services()->session_manager->setLoggedInUser()`.
+* Docker test stack upgraded to PHP 8.1 / MySQL 8.0 / Elgg 5.1.x.
+
 ## 4.0.0 (Elgg 4.x)
 
 ### Breaking Changes
