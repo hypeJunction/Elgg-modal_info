@@ -1,8 +1,8 @@
 <?php
 
-$guid = get_input('guid');
-$container_guid = get_input('container_guid');
-$entity = get_entity($guid);
+$guid = (int) get_input('guid');
+$container_guid = (int) get_input('container_guid');
+$entity = $guid ? get_entity($guid) : null;
 if (!$entity) {
     $entity = new ElggObject();
     $entity->setSubtype('modal_info');

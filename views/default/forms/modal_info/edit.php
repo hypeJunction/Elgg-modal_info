@@ -93,7 +93,7 @@ $container = elgg_extract('container', $vars);
 	<?php
 	echo elgg_view('input/access', array(
 		'name' => 'access_id',
-		'value' => $entity->access_id ? : get_default_access(),
+		'value' => $entity->access_id ? : elgg_get_default_access(),
 		'required' => true,
 	));
 	?>

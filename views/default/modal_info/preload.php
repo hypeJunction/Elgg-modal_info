@@ -5,7 +5,7 @@ if (!elgg_is_logged_in() || elgg_in_context('admin') || elgg_in_context('modal_i
 }
 
 $user_guid = (int) elgg_get_logged_in_user_guid();
-$page_url = parse_url(current_page_url(), PHP_URL_PATH);
+$page_url = parse_url(elgg_get_current_url(), PHP_URL_PATH);
 
 $not_viewed_clause = function(\Elgg\Database\QueryBuilder $qb, $alias) use ($user_guid) {
 	$rel = $qb->subquery('entity_relationships');

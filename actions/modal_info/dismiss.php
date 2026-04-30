@@ -1,7 +1,7 @@
 <?php
 
-$guid = get_input('guid');
-$entity = get_entity($guid);
+$guid = (int) get_input('guid');
+$entity = $guid ? get_entity($guid) : null;
 $user = elgg_get_logged_in_user_entity();
 
 if ($entity && $user) {
