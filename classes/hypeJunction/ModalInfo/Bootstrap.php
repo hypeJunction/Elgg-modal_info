@@ -5,6 +5,9 @@ namespace hypeJunction\ModalInfo;
 use Elgg\Includer;
 use Elgg\PluginBootstrap;
 
+/**
+ * Plugin bootstrap.
+ */
 class Bootstrap extends PluginBootstrap {
 
 	/**
@@ -18,7 +21,6 @@ class Bootstrap extends PluginBootstrap {
 	 * {@inheritdoc}
 	 */
 	public function boot() {
-
 	}
 
 	/**
@@ -42,56 +44,61 @@ class Bootstrap extends PluginBootstrap {
 	 * {@inheritdoc}
 	 */
 	public function ready() {
-
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function shutdown() {
-
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function activate() {
-
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function deactivate() {
-
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function upgrade() {
-
 	}
 
 	/**
 	 * Set entity URL for modal_info objects
+	 *
+	 * @param \Elgg\Event $event "entity:url" event
+	 *
+	 * @return string|void
 	 */
 	public function setEntityUrl(\Elgg\Event $event) {
 		$entity = $event->getEntityParam();
 		if (!$entity instanceof \ElggObject || $entity->getSubtype() != 'modal_info') {
 			return;
 		}
+
 		return "modal_info/view/{$entity->guid}";
 	}
 
 	/**
 	 * Setup entity menu for modal_info objects
+	 *
+	 * @param \Elgg\Event $event "register", "menu:entity" event
+	 *
+	 * @return \ElggMenuItem[]|void
 	 */
 	public function setupEntityMenu(\Elgg\Event $event) {
 		$entity = $event->getEntityParam();
 		if (!$entity instanceof \ElggObject || $entity->getSubtype() != 'modal_info') {
 			return;
 		}
+
 		$return = $event->getValue();
 		if ($entity->canEdit()) {
 			$return[] = \ElggMenuItem::factory([

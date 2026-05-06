@@ -62,4 +62,5 @@ if ($entity->show_once) {
 		$user->addRelationship($entity->guid, 'viewed');
 	}
 }
+
 echo elgg_view('modal_info/content', ['entity' => $entity]);
