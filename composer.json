@@ -2,7 +2,7 @@
 	"name": "hypejunction/modal_info",
 	"type": "elgg-plugin",
 	"description": "Modal Info Screens",
-	"homepage": "http://hypejunction.com",
+	"homepage": "https://github.com/hypeJunction/Elgg-modal_info",
 	"keywords": [
 		"elgg",
 		"plugin",
@@ -14,7 +14,7 @@
 	"authors": [
 		{
 			"name": "Ismayil Khayredinov",
-			"email": "info@hypejunction.com"
+			"email": "ismayil.khayredinov@gmail.com"
 		}
 	],
 	"require": {
