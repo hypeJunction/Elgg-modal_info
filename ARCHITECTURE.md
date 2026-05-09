@@ -1,4 +1,4 @@
-# modal_info — Plugin Architecture (Elgg 5.x)
+# modal_info — Plugin Architecture (Elgg 6.x)
 
 ## Summary
 

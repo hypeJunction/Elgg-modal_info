@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.0.0 (2026-05-09)
+
+### Elgg 6.x migration
+
+- Bump `elgg/elgg` to `~6.1.0`, `php` to `>=8.1`, add `ext-intl`
+- Convert `modal_info.js` from AMD (`define(function(require){...})`) to ES module
+- Replace `elgg_require_js('modal_info')` with `elgg_import_esm('modal_info')`
+- Add docker/elgg6/ test stack
+- No data migration needed
+
 ## 5.0.0 (2026-04-20)
 
 ### Elgg 5.x migration

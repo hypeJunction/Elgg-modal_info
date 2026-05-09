@@ -2,26 +2,12 @@
 
 namespace hypeJunction\ModalInfo;
 
-use Elgg\Includer;
-use Elgg\PluginBootstrap;
+use Elgg\DefaultPluginBootstrap;
 
 /**
  * Plugin bootstrap.
  */
-class Bootstrap extends PluginBootstrap {
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function load() {
-		Includer::requireFileOnce($this->plugin->getPath() . '/autoloader.php');
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function boot() {
-	}
+class Bootstrap extends DefaultPluginBootstrap {
 
 	/**
 	 * {@inheritdoc}
@@ -38,36 +24,6 @@ class Bootstrap extends PluginBootstrap {
 			'parent_name' => 'appearance',
 			'section' => 'configure',
 		]));
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function ready() {
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function shutdown() {
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function activate() {
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function deactivate() {
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function upgrade() {
 	}
 
 	/**

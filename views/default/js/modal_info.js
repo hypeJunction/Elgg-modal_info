@@ -1,14 +1,11 @@
-define(function (require) {
+import Ajax from 'elgg/Ajax';
+import $ from 'jquery';
+import lightbox from 'elgg/lightbox';
 
-	var Ajax = require('elgg/Ajax');
-	var $ = require('jquery');
-	var lightbox = require('elgg/lightbox');
-
-	var $modal = $('#modal-info');
-	if ($modal.length === 0) {
-		return;
-	}
-
+const $modal = $('#modal-info');
+if ($modal.length === 0) {
+	// Nothing to show
+} else {
 	lightbox.open({
 		html: $modal.html(),
 		width: $modal.data('width') || 600,
@@ -17,11 +14,10 @@ define(function (require) {
 
 	$(document).on('click', '.modal-info-dismiss', function (e) {
 		e.preventDefault();
-		var $elem = $(this);
-		var ajax = new Ajax();
+		const $elem = $(this);
+		const ajax = new Ajax();
 
 		lightbox.close();
 		ajax.action($elem.attr('href'));
 	});
-
-});
+}

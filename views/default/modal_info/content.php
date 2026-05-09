@@ -22,7 +22,7 @@ if ($entity->can_dismiss && elgg_is_logged_in()) {
 	], $dismiss_button);
 }
 
-elgg_require_js('modal_info');
+elgg_import_esm('modal_info');
 echo elgg_format_element('div', [
 	'id' => 'modal-info',
 	'class' => 'hidden',
