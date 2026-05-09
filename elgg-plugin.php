@@ -5,7 +5,7 @@ return [
 		'id' => 'modal_info',
 		'name' => 'Modal Info Screens',
 		'description' => 'Custom modal info screen popups',
-		'version' => '6.0.0',
+		'version' => '7.0.0',
 		'author' => 'Ismayil Khayredinov',
 		'categories' => ['help'],
 	],
