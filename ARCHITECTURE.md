@@ -1,4 +1,4 @@
-# modal_info — Plugin Architecture (Elgg 6.x)
+# modal_info — Plugin Architecture (Elgg 7.x)
 
 ## Summary
 
@@ -52,7 +52,7 @@ modal_info/
 │       ├── edit.php      # Admin edit page
 │       └── view.php      # Admin view page
 ├── elgg-plugin.php       # Plugin declaration, routes, actions
-├── composer.json         # Dependencies: elgg/elgg ^5.0
+├── composer.json         # Dependencies: elgg/elgg ~7.0.0
 └── autoloader.php        # PSR-4 autoloader for classes/
 ```
 
@@ -85,11 +85,25 @@ All routes require `\Elgg\Router\Middleware\AdminGatekeeper`.
 
 ## Dependencies
 
-None (no plugin deps; requires only Elgg core ≥ 5.0, PHP ≥ 8.0).
+None (no plugin deps; requires only Elgg core ≥ 7.0, PHP ≥ 8.3).
 
 ## JavaScript
 
-`views/default/js/modal_info.js` — AMD module. On page load, reads the `#modal-info` div injected by `preload.php` and opens it via `elgg/lightbox`. The dismiss button triggers `elgg/Ajax` to call `action/modal_info/dismiss`.
+`views/default/js/modal_info.js` — ES module. On page load, reads the `#modal-info` div injected by `preload.php` and opens it via `elgg/lightbox`. The dismiss button triggers `elgg/Ajax` to call `action/modal_info/dismiss`.
+
+## Migration Notes (6.x → 7.x)
+
+- `elgg/elgg ~7.0.0`, `php >=8.3` in `composer.json`.
+- Docker test stack added for Elgg 7.x (docker/elgg7/) with PHP 8.3.
+- No breaking changes: no CSS Crush syntax, no direct `ElggObject` instantiation, no removed Elgg APIs.
+- No data migration needed.
+
+## Migration Notes (5.x → 6.x)
+
+- `elgg/elgg ~6.1.0`, `php >=8.1`, `ext-intl` added in `composer.json`.
+- `modal_info.js` converted from AMD to ES module; `elgg_require_js()` → `elgg_import_esm()`.
+- Docker test stack added for Elgg 6.x (docker/elgg6/).
+- No data migration needed.
 
 ## Migration Notes (4.x → 5.x)
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.0.0 (2026-05-09)
+
+### Elgg 7.x migration
+
+- Bump `elgg/elgg` to `~7.0.0`, `php` to `>=8.3`
+- Add docker/elgg7/ test stack (PHP 8.3, MySQL 8.0)
+- No PHP or CSS breaking changes (no CSS Crush syntax, no ElggObject instantiation, no removed APIs)
+- No data migration needed
+
 ## 6.0.0 (2026-05-09)
 
 ### Elgg 6.x migration
