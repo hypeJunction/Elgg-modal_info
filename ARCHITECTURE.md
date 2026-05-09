@@ -91,6 +91,10 @@ None (no plugin deps; requires only Elgg core ≥ 7.0, PHP ≥ 8.3).
 
 `views/default/js/modal_info.js` — ES module. On page load, reads the `#modal-info` div injected by `preload.php` and opens it via `elgg/lightbox`. The dismiss button triggers `elgg/Ajax` to call `action/modal_info/dismiss`.
 
+## Seeding
+
+No seeder required. This plugin owns no entity types, subtypes, or persistent relationship schemas — it is a pure UI/utility/admin plugin with no persisted entity surface of its own.
+
 ## Migration Notes (6.x → 7.x)
 
 - `elgg/elgg ~7.0.0`, `php >=8.3` in `composer.json`.
