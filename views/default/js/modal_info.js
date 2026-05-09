@@ -1,29 +1,23 @@
-define(function (require) {
+import Ajax from 'elgg/Ajax';
+import $ from 'jquery';
+import lightbox from 'elgg/lightbox';
 
-	var elgg = require('elgg');
-	var $ = require('jquery');
-
-	var $modal = $('#modal-info');
-	if (typeof $.colorbox === 'undefined' || $modal.length === 0) {
-		return;
-	}
-
-	$.colorbox({
+const $modal = $('#modal-info');
+if ($modal.length === 0) {
+	// Nothing to show
+} else {
+	lightbox.open({
 		html: $modal.html(),
-		//title: $modal.data('title'),
 		width: $modal.data('width') || 600,
 		height: $modal.data('height') || 600,
 	});
 
 	$(document).on('click', '.modal-info-dismiss', function (e) {
 		e.preventDefault();
-		var $elem = $(this);
+		const $elem = $(this);
+		const ajax = new Ajax();
 
-		elgg.action($elem.attr('href'), {
-			beforeSend: function () {
-				$.colorbox.close();
-			}
-		});
+		lightbox.close();
+		ajax.action($elem.attr('href'));
 	});
-
-});
+}
