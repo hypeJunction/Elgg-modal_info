@@ -1,6 +1,6 @@
 Modal Info Screens
 ==================
-![Elgg 5.x](https://img.shields.io/badge/Elgg-5.x-orange.svg?style=flat-square)
+![Elgg 7.x](https://img.shields.io/badge/Elgg-7.x-orange.svg?style=flat-square)
 
 ## Features
 
@@ -14,3 +14,9 @@ Modal Info Screens
 ## Acknowledgements
 
 Plugin has been partially sponsored by http://smile-connect.com/
+
+## Compatibility
+
+| Plugin version | Elgg version |
+|---|---|
+| current | 7.x |
