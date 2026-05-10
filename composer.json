@@ -1,37 +1,38 @@
 {
-	"name": "hypejunction/modal_info",
-	"type": "elgg-plugin",
-	"description": "Modal Info Screens",
-	"homepage": "https://github.com/hypeJunction/Elgg-modal_info",
-	"keywords": [
-		"elgg",
-		"plugin",
-		"modal",
-		"welcome",
-		"help"
-	],
-	"license": "GPL-2.0-only",
-	"authors": [
-		{
-			"name": "Ismayil Khayredinov",
-			"email": "ismayil.khayredinov@gmail.com"
-		}
-	],
-	"require": {
-		"php": ">=8.3",
-		"ext-intl": "*",
-		"elgg/elgg": "~7.0.0",
-		"composer/installers": "^2.0"
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/installers": true
-		}
-	},
-	"extra": {
-		"installer-name": "modal_info",
-		"elgg-plugin": {
-			"id": "modal_info"
-		}
-	}
+    "name": "hypejunction/modal_info",
+    "type": "elgg-plugin",
+    "description": "Modal Info Screens",
+    "homepage": "https://github.com/hypeJunction/Elgg-modal_info",
+    "keywords": [
+        "elgg",
+        "plugin",
+        "modal",
+        "welcome",
+        "help"
+    ],
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Ismayil Khayredinov",
+            "email": "ismayil.khayredinov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.3",
+        "ext-intl": "*",
+        "elgg/elgg": "~7.0.0",
+        "composer/installers": "^2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-name": "modal_info",
+        "elgg-plugin": {
+            "id": "modal_info"
+        }
+    },
+    "version": "7.0.0"
 }
