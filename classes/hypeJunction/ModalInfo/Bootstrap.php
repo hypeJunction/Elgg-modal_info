@@ -13,13 +13,13 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 * {@inheritdoc}
 	 */
 	public function init() {
-		elgg_register_event_handler('entity:url', 'object', [$this, 'setEntityUrl']);
-		elgg_register_event_handler('register', 'menu:entity', [$this, 'setupEntityMenu']);
-		elgg_extend_view('page/elements/footer', 'modal_info/preload');
-		elgg_register_menu_item('page', \ElggMenuItem::factory([
+		\elgg_register_event_handler('entity:url', 'object', [$this, 'setEntityUrl']);
+		\elgg_register_event_handler('register', 'menu:entity', [$this, 'setupEntityMenu']);
+		\elgg_extend_view('page/elements/footer', 'modal_info/preload');
+		\elgg_register_menu_item('page', \ElggMenuItem::factory([
 			'name' => 'modal_info',
 			'href' => 'modal_info/all',
-			'text' => elgg_echo('modal_info:all'),
+			'text' => \elgg_echo('modal_info:all'),
 			'context' => 'admin',
 			'parent_name' => 'appearance',
 			'section' => 'configure',
@@ -59,13 +59,13 @@ class Bootstrap extends DefaultPluginBootstrap {
 		if ($entity->canEdit()) {
 			$return[] = \ElggMenuItem::factory([
 				'name' => 'edit',
-				'text' => elgg_echo('edit'),
+				'text' => \elgg_echo('edit'),
 				'href' => "modal_info/edit/{$entity->guid}",
 				'priority' => 800,
 			]);
 			$return[] = \ElggMenuItem::factory([
 				'name' => 'delete',
-				'text' => elgg_view_icon('delete'),
+				'text' => \elgg_view_icon('delete'),
 				'href' => "action/entity/delete?guid={$entity->guid}",
 				'confirm' => true,
 				'priority' => 900,

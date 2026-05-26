@@ -20,7 +20,7 @@ class ModalInfoTest extends IntegrationTestCase {
 
 	public function up() {
 		$this->admin = $this->getAdmin();
-		_elgg_services()->session_manager->setLoggedInUser($this->admin);
+		\_elgg_services()->session_manager->setLoggedInUser($this->admin);
 
 		$this->user = $this->createUser();
 	}
@@ -30,7 +30,7 @@ class ModalInfoTest extends IntegrationTestCase {
 			$this->user->delete();
 		}
 
-		_elgg_services()->session_manager->removeLoggedInUser();
+		\_elgg_services()->session_manager->removeLoggedInUser();
 	}
 
 	/**
@@ -40,7 +40,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$entity = new ElggObject();
 		$entity->setSubtype('modal_info');
 		$entity->owner_guid = $this->admin->guid;
-		$entity->container_guid = elgg_get_site_entity()->guid;
+		$entity->container_guid = \elgg_get_site_entity()->guid;
 		$entity->access_id = ACCESS_PUBLIC;
 		$entity->title = 'Test Modal';
 		$this->assertTrue($entity->save() !== false);
@@ -59,7 +59,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$entity = new ElggObject();
 		$entity->setSubtype('modal_info');
 		$entity->owner_guid = $this->admin->guid;
-		$entity->container_guid = elgg_get_site_entity()->guid;
+		$entity->container_guid = \elgg_get_site_entity()->guid;
 		$entity->access_id = ACCESS_PUBLIC;
 		$entity->title = 'Welcome Modal';
 		$entity->description = '<p>Welcome to the site!</p>';
@@ -73,7 +73,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$this->assertTrue($entity->save() !== false);
 
 		// Reload from DB
-		_elgg_services()->entityCache->delete($entity->guid);
+		\_elgg_services()->entityCache->delete($entity->guid);
 		$loaded = get_entity($entity->guid);
 
 		$this->assertNotNull($loaded);
@@ -96,7 +96,7 @@ class ModalInfoTest extends IntegrationTestCase {
 	 * Test creating a modal_info entity via direct save (action file test).
 	 */
 	public function testDirectEntityCreation() {
-		$site = elgg_get_site_entity();
+		$site = \elgg_get_site_entity();
 
 		$entity = new ElggObject();
 		$entity->setSubtype('modal_info');
@@ -113,7 +113,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$this->assertTrue($entity->save() !== false);
 
 		// Find the created entity
-		$entities = elgg_get_entities([
+		$entities = \elgg_get_entities([
 			'type' => 'object',
 			'subtype' => 'modal_info',
 			'owner_guid' => $this->admin->guid,
@@ -144,7 +144,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$entity = new ElggObject();
 		$entity->setSubtype('modal_info');
 		$entity->owner_guid = $this->admin->guid;
-		$entity->container_guid = elgg_get_site_entity()->guid;
+		$entity->container_guid = \elgg_get_site_entity()->guid;
 		$entity->access_id = ACCESS_PUBLIC;
 		$entity->title = 'Original Title';
 		$entity->description = 'Original Description';
@@ -159,7 +159,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$entity->save();
 
 		// Reload
-		_elgg_services()->entityCache->delete($entity->guid);
+		\_elgg_services()->entityCache->delete($entity->guid);
 		$loaded = get_entity($entity->guid);
 
 		$this->assertEquals('Updated Title', $loaded->title);
@@ -178,7 +178,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$entity = new ElggObject();
 		$entity->setSubtype('modal_info');
 		$entity->owner_guid = $this->admin->guid;
-		$entity->container_guid = elgg_get_site_entity()->guid;
+		$entity->container_guid = \elgg_get_site_entity()->guid;
 		$entity->access_id = ACCESS_PUBLIC;
 		$entity->title = 'Dismissable Modal';
 		$entity->can_dismiss = true;
@@ -206,7 +206,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$entity = new ElggObject();
 		$entity->setSubtype('modal_info');
 		$entity->owner_guid = $this->admin->guid;
-		$entity->container_guid = elgg_get_site_entity()->guid;
+		$entity->container_guid = \elgg_get_site_entity()->guid;
 		$entity->access_id = ACCESS_PUBLIC;
 		$entity->title = 'URL Test Modal';
 		$entity->save();
@@ -222,7 +222,7 @@ class ModalInfoTest extends IntegrationTestCase {
 	 */
 	public function testAdminGatekeeper() {
 		// Login as non-admin user
-		_elgg_services()->session_manager->setLoggedInUser($this->user);
+		\_elgg_services()->session_manager->setLoggedInUser($this->user);
 
 		// The routes are defined with AdminGatekeeper middleware.
 		// Verify the user is not an admin.
@@ -242,7 +242,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		}
 
 		// Restore admin session
-		_elgg_services()->session_manager->setLoggedInUser($this->admin);
+		\_elgg_services()->session_manager->setLoggedInUser($this->admin);
 	}
 
 	/**
@@ -252,7 +252,7 @@ class ModalInfoTest extends IntegrationTestCase {
 		$entity = new ElggObject();
 		$entity->setSubtype('modal_info');
 		$entity->owner_guid = $this->admin->guid;
-		$entity->container_guid = elgg_get_site_entity()->guid;
+		$entity->container_guid = \elgg_get_site_entity()->guid;
 		$entity->access_id = ACCESS_PUBLIC;
 		$entity->title = 'Permission Test Modal';
 		$entity->save();
