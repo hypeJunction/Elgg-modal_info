@@ -33,6 +33,5 @@
         "elgg-plugin": {
             "id": "modal_info"
         }
-    },
-    "version": "7.0.0"
+    }
 }
